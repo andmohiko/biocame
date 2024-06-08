@@ -8,6 +8,7 @@ import styles from './style.module.css'
 import type { EditBiographyInputType } from '~/features/biography/types'
 import { editBiographySchema } from '~/features/biography/types'
 import { CircleImageInputWithCropper } from '~/components/Inputs/CircleImageInputWithCropper'
+import { SquareImageInputWithCropper } from '~/components/Inputs/SquareImageInputWithCropper'
 
 type Props = {
   defaultValues: UserWithBiography
@@ -24,10 +25,11 @@ export const EditBiographyForm = ({
     resolver: zodResolver(editBiographySchema),
     mode: 'all',
     defaultValues: {
-      catchCopy: defaultValues.catchCopy,
-      displayName: defaultValues.displayName,
+      // backgroundImagePath: defaultValues.backgroundImagePath,
+      // catchCopy: defaultValues.catchCopy,
+      // displayName: defaultValues.displayName,
       // profileImagePath: defaultValues.profileImagePath,
-      username: defaultValues.username,
+      // username: defaultValues.username,
     },
   })
 
@@ -48,17 +50,32 @@ export const EditBiographyForm = ({
         <div className={styles.overlay} />
       </div>
       <div className={styles.inputs}>
-        <Controller
-          name="profileImagePath"
-          control={control}
-          render={({ field }) => (
-            <CircleImageInputWithCropper
-              value={field.value}
-              onChange={(e) => onSave(() => field.onChange(e))}
-              error={errors.profileImagePath?.message}
-            />
-          )}
-        />
+        <div className={styles.images}>
+          <div />
+          <Controller
+            name="profileImagePath"
+            control={control}
+            render={({ field }) => (
+              <CircleImageInputWithCropper
+                value={field.value}
+                onChange={(e) => onSave(() => field.onChange(e))}
+                error={errors.profileImagePath?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="backgroundImagePath"
+            control={control}
+            render={({ field }) => (
+              <SquareImageInputWithCropper
+                value={field.value}
+                onChange={(e) => onSave(() => field.onChange(e))}
+                error={errors.backgroundImagePath?.message}
+              />
+            )}
+          />
+        </div>
 
         <Controller
           name="username"

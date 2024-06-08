@@ -2,6 +2,7 @@ import type { UserWithBiography } from '@biocame/common'
 
 import { EditBiographyForm } from '~/features/biography/components/EditBiographyForm'
 import { SimpleLayout } from '~/components/Layouts/SimpleLayout'
+import { FlexBox } from '~/components/Base/FlexBox'
 
 export const MyPageContainer = (): React.ReactElement => {
   const userWithBiography: UserWithBiography = {
@@ -21,7 +22,9 @@ export const MyPageContainer = (): React.ReactElement => {
 
   return (
     <SimpleLayout>
-      <EditBiographyForm defaultValues={userWithBiography} />
+      <FlexBox align="stretch" px={16} py={16}>
+        <EditBiographyForm defaultValues={userWithBiography} />
+      </FlexBox>
     </SimpleLayout>
   )
 }

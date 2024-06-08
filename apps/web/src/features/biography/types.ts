@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const editBiographySchema = z.object({
+  backgroundImagePath: z.string().url({ message: '画像を選択してください' }),
   catchCopy: z
     .string()
     .trim()
