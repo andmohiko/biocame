@@ -2,13 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
 import type { UserWithBiography } from '@biocame/common'
 import { TextInput } from '@mantine/core'
-import { useEffect } from 'react'
 
 import styles from './style.module.css'
 
 import type { EditBiographyInputType } from '~/features/biography/types'
 import { editBiographySchema } from '~/features/biography/types'
-import { FileInputWithCropper } from '~/components/Inputs/FileInputWithCropper'
+import { CircleImageInputWithCropper } from '~/components/Inputs/CircleImageInputWithCropper'
 
 type Props = {
   defaultValues: UserWithBiography
@@ -53,7 +52,7 @@ export const EditBiographyForm = ({
           name="profileImagePath"
           control={control}
           render={({ field }) => (
-            <FileInputWithCropper
+            <CircleImageInputWithCropper
               value={field.value}
               onChange={(e) => onSave(() => field.onChange(e))}
               error={errors.profileImagePath?.message}

@@ -21,7 +21,7 @@ type Props = {
   error: string | undefined
 }
 
-export const FileInputWithCropper = ({
+export const CircleImageInputWithCropper = ({
   value,
   onChange,
   error,
