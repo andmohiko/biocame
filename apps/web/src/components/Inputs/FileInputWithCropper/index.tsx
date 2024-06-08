@@ -27,7 +27,7 @@ export const FileInputWithCropper = ({
   error,
 }: Props): React.ReactElement => {
   const [
-    { file, uncroppedImageUrl, crop },
+    { file, uncroppedImageUrl, crop, imageRef },
     { onSelectImage, remove, onCrop, onChangeCrop, closeCropper },
     { isOpenCropper, isDisabled, isLoading },
   ] = useCropImageInput(value, onChange)
@@ -87,11 +87,14 @@ export const FileInputWithCropper = ({
               >
                 <img
                   src={uncroppedImageUrl}
+                  ref={imageRef}
                   alt=""
                   style={{
                     height: '100%',
                     width: '100%',
                     maxHeight: 400,
+                    border: '4px solid #ccc',
+                    borderRadius: 10,
                   }}
                 />
               </ReactCrop>

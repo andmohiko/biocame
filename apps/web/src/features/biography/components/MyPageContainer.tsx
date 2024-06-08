@@ -2,7 +2,6 @@ import type { UserWithBiography } from '@biocame/common'
 
 import { EditBiographyForm } from '~/features/biography/components/EditBiographyForm'
 import { SimpleLayout } from '~/components/Layouts/SimpleLayout'
-import { TitleText } from '~/components/Typography/TitleText'
 
 export const MyPageContainer = (): React.ReactElement => {
   const userWithBiography: UserWithBiography = {
@@ -22,7 +21,6 @@ export const MyPageContainer = (): React.ReactElement => {
 
   return (
     <SimpleLayout>
-      <TitleText>編集する</TitleText>
       <EditBiographyForm defaultValues={userWithBiography} />
     </SimpleLayout>
   )
