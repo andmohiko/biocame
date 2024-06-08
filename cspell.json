@@ -2,8 +2,8 @@
   "version": "0.2",
   "language": "en",
   "words": [
-    "biocame",
     "autosize",
+    "biocame",
     "dropzone",
     "firebase",
     "firestore",
@@ -15,6 +15,7 @@
     "nextjs",
     "predeploy",
     "recaptcha",
+    "signup",
     "svgs",
     "vercel",
     "webp"

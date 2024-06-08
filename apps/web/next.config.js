@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ['@web/common'],
+  transpilePackages: ['@biocame/common'],
   images: {
     remotePatterns: [
       {
