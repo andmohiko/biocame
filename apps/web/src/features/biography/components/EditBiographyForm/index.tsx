@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
-import type { UserWithBiography } from '@biocame/common'
+import type { Biography } from '@biocame/common'
 import { TextInput } from '@mantine/core'
 
 import styles from './style.module.css'
@@ -11,12 +11,10 @@ import { CircleImageInputWithCropper } from '~/components/Inputs/CircleImageInpu
 import { SquareImageInputWithCropper } from '~/components/Inputs/SquareImageInputWithCropper'
 
 type Props = {
-  defaultValues: UserWithBiography
+  biography: Biography | undefined
 }
 
-export const EditBiographyForm = ({
-  defaultValues,
-}: Props): React.ReactNode => {
+export const EditBiographyForm = ({ biography }: Props): React.ReactNode => {
   const {
     control,
     getValues,
@@ -24,13 +22,21 @@ export const EditBiographyForm = ({
   } = useForm<EditBiographyInputType>({
     resolver: zodResolver(editBiographySchema),
     mode: 'all',
-    defaultValues: {
-      // backgroundImagePath: defaultValues.backgroundImagePath,
-      // catchCopy: defaultValues.catchCopy,
-      // displayName: defaultValues.displayName,
-      // profileImagePath: defaultValues.profileImagePath,
-      // username: defaultValues.username,
-    },
+    defaultValues: biography
+      ? {
+          backgroundImagePath: biography.backgroundImagePath || undefined,
+          catchCopy: biography.catchCopy,
+          displayName: biography.displayName,
+          profileImagePath: biography.profileImagePath || undefined,
+          username: biography.username,
+        }
+      : {
+          backgroundImagePath: undefined,
+          catchCopy: '',
+          displayName: '',
+          profileImagePath: undefined,
+          username: '',
+        },
   })
 
   const onSave = (onChange: (...event: Array<any>) => void) => {
@@ -42,11 +48,11 @@ export const EditBiographyForm = ({
   return (
     <div className={styles.form}>
       <div className={styles.background}>
-        <img
-          src={defaultValues.backgroundImagePath}
+        {/* <img
+          src={biography.backgroundImagePath}
           alt=""
           className={styles.backgroundImage}
-        />
+        /> */}
         <div className={styles.overlay} />
       </div>
       <div className={styles.inputs}>
