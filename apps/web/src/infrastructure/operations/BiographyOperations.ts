@@ -1,11 +1,19 @@
-import type { Biography, CreateBiographyDto, UserId } from '@biocame/common'
+import type {
+  Biography,
+  BiographyId,
+  CreateBiographyDto,
+  UpdateBiographyDto,
+  UserId,
+} from '@biocame/common'
 import { biographyCollection } from '@biocame/common'
 import {
   addDoc,
   collection,
+  doc,
   limit,
   onSnapshot,
   query,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 
@@ -45,4 +53,11 @@ export const createBiographyOperation = async (
   dto: CreateBiographyDto,
 ): Promise<void> => {
   await addDoc(collection(db, biographyCollection), dto)
+}
+
+export const updateBioGraphyOperation = async (
+  biographyId: BiographyId,
+  dto: UpdateBiographyDto,
+): Promise<void> => {
+  updateDoc(doc(db, biographyCollection, biographyId), dto)
 }

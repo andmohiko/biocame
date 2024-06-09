@@ -48,6 +48,7 @@ service cloud.firestore {
     match /biographies/{biographyId} {
         allow read;
         allow create: if isSignedIn() && isUser(requestData().userId) && isValidBiographySchema(requestData());
+        allow update: if isSignedIn() && isUser(requestData().userId) && isValidBiographySchema(requestData());
     }
   }
 }

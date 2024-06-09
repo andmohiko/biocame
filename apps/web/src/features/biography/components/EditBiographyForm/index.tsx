@@ -9,12 +9,14 @@ import type { EditBiographyInputType } from '~/features/biography/types'
 import { editBiographySchema } from '~/features/biography/types'
 import { CircleImageInputWithCropper } from '~/components/Inputs/CircleImageInputWithCropper'
 import { SquareImageInputWithCropper } from '~/components/Inputs/SquareImageInputWithCropper'
+import { useUpdateBiography } from '~/features/biography/hooks/useUpdateBiography'
 
 type Props = {
-  biography: Biography | undefined
+  biography: Biography
 }
 
 export const EditBiographyForm = ({ biography }: Props): React.ReactNode => {
+  const { updateBiography } = useUpdateBiography()
   const {
     control,
     getValues,
@@ -22,27 +24,22 @@ export const EditBiographyForm = ({ biography }: Props): React.ReactNode => {
   } = useForm<EditBiographyInputType>({
     resolver: zodResolver(editBiographySchema),
     mode: 'all',
-    defaultValues: biography
-      ? {
-          backgroundImagePath: biography.backgroundImagePath || undefined,
-          catchCopy: biography.catchCopy,
-          displayName: biography.displayName,
-          profileImagePath: biography.profileImagePath || undefined,
-          username: biography.username,
-        }
-      : {
-          backgroundImagePath: undefined,
-          catchCopy: '',
-          displayName: '',
-          profileImagePath: undefined,
-          username: '',
-        },
+    defaultValues: {
+      backgroundImagePath: biography.backgroundImagePath || undefined,
+      catchCopy: biography.catchCopy,
+      displayName: biography.displayName,
+      profileImagePath: biography.profileImagePath || undefined,
+      username: biography.username,
+    },
   })
 
-  const onSave = (onChange: (...event: Array<any>) => void) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSave = async (onChange: (...event: Array<any>) => void) => {
     onChange()
     const values = getValues()
+    // eslint-disable-next-line no-console
     console.log('values', values)
+    await updateBiography(biography.biographyId, values)
   }
 
   return (
