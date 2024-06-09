@@ -10,13 +10,10 @@ import type { ReactNode } from 'react'
 import { createContext, useEffect, useState, useContext, useMemo } from 'react'
 
 import { LoadingAnimation } from '~/components/Base/Loading'
+import { useRegisterUser } from '~/hooks/useRegisterUser'
 import { useToast } from '~/hooks/useToast'
-import {
-  createUserOperation,
-  existsUserOperation,
-} from '~/infrastructure/operations/UserRepository'
-// import { useAuth } from '~/hooks/useAuth'
-import { auth, serverTimestamp } from '~/lib/firebase'
+import { existsUserOperation } from '~/infrastructure/operations/UserOperations'
+import { auth } from '~/lib/firebase'
 import { errorMessage } from '~/utils/errorMessage'
 
 // ログインしていなくても開けるページ
@@ -50,6 +47,7 @@ const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<User | null | undefined>(null)
   const [uid, setUid] = useState<string | null>(null)
   const { showErrorToast } = useToast()
+  const { registerUser } = useRegisterUser()
 
   const isLogin = useMemo(() => !!currentUser, [currentUser])
 
@@ -62,15 +60,7 @@ const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
 
         const isRegistered = await existsUserOperation(uid)
         if (!isRegistered) {
-          await createUserOperation(uid, {
-            backgroundImagePath: null,
-            createdAt: serverTimestamp,
-            displayName: '',
-            email: userData.email!,
-            profileImagePath: null,
-            updatedAt: serverTimestamp,
-            username: getInitialUsername(userData),
-          })
+          await registerUser(userData)
         }
 
         push('/mypage')
@@ -126,13 +116,3 @@ const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
 export { FirebaseAuthContext, FirebaseAuthProvider }
 
 export const useFirebaseAuthContext = () => useContext(FirebaseAuthContext)
-
-export const getInitialUsername = (userData: User) => {
-  if (userData.displayName) {
-    return userData.displayName
-  }
-  if (userData.email) {
-    return userData.email.split('@')[0]
-  }
-  return userData.uid
-}
