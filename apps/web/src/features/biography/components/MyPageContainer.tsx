@@ -12,12 +12,12 @@ export const MyPageContainer = (): React.ReactElement => {
     catchCopy: 'エンジニア',
     createdAt: new Date(),
     displayName: 'もひこ',
-    email: 'andmohiko@gmail.com',
+    email: 'example@test.com',
     profileImagePath:
       'https://pbs.twimg.com/profile_images/1346561069779623936/3tYi4dz5_400x400.jpg',
     updatedAt: new Date(),
     userId: 'userId',
-    username: 'andmohiko',
+    username: 'testUser',
   }
 
   return (

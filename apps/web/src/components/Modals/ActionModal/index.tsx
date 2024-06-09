@@ -1,9 +1,9 @@
 import { Modal } from '@mantine/core'
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 import styles from './style.module.scss'
 
-import { BasicButton } from '~/components/Buttons/BasicButton';
+import { BasicButton } from '~/components/Buttons/BasicButton'
 import { IconButton } from '~/components/Buttons/IconButton'
 
 type Props = {
@@ -40,7 +40,11 @@ export const ActionModal = ({
     >
       <div className={styles.header}>
         <div className={styles.close}>
-          <IconButton icon={<IoMdArrowRoundBack size={24} />} onClick={onClose} importance='tertiary' />
+          <IconButton
+            icon={<IoMdArrowRoundBack size={24} />}
+            onClick={onClose}
+            importance="tertiary"
+          />
         </div>
         <p className={styles.title}>{title}</p>
         {onSave && (

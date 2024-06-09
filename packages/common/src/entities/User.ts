@@ -3,6 +3,8 @@ import type { FieldValue } from 'firebase/firestore'
 import type { Uid } from './Auth'
 import type { Biography } from './Biography'
 
+export const userCollection = 'users'
+
 export type UserId = Uid
 
 export type User = {
