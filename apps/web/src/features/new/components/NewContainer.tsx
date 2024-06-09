@@ -4,8 +4,8 @@ import { SimpleLayout } from '~/components/Layouts/SimpleLayout'
 import { TitleText } from '~/components/Typography/TitleText'
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 
-export const NewContainer = (): React.ReactElement => {
-  const { loginWithGoogle } = useFirebaseAuthContext()
+export const NewContainer = (): React.ReactNode => {
+  const { loginWithGoogle, logout } = useFirebaseAuthContext()
   return (
     <SimpleLayout>
       <TitleText>びおかめ</TitleText>
@@ -14,6 +14,7 @@ export const NewContainer = (): React.ReactElement => {
         <BasicButton onClick={loginWithGoogle} importance="secondary">
           ログイン
         </BasicButton>
+        <BasicButton onClick={logout}>ログアウト</BasicButton>
       </FlexBox>
     </SimpleLayout>
   )
