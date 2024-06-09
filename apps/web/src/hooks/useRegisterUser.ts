@@ -17,13 +17,14 @@ export const useRegisterUser = (): {
       updatedAt: serverTimestamp,
       username: getInitialUsername(userData),
     })
-    await createBiographyOperation(userData.uid, {
+    await createBiographyOperation({
       backgroundImagePath: null,
       catchCopy: '',
       createdAt: serverTimestamp,
       displayName: '',
       profileImagePath: null,
       updatedAt: serverTimestamp,
+      userId: userData.uid,
       username: '',
     })
   }

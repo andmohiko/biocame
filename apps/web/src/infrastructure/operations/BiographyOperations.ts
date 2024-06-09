@@ -1,12 +1,12 @@
 import type { Biography, CreateBiographyDto, UserId } from '@biocame/common'
-import { biographyCollection, userCollection } from '@biocame/common'
+import { biographyCollection } from '@biocame/common'
 import {
   addDoc,
   collection,
   limit,
   onSnapshot,
-  orderBy,
   query,
+  where,
 } from 'firebase/firestore'
 
 import { db } from '~/lib/firebase'
@@ -20,8 +20,8 @@ export const subscribeBiographyByIdOperation = (
 ) => {
   const unsubscribe = onSnapshot(
     query(
-      collection(db, userCollection, userId, biographyCollection),
-      orderBy('createdAt', 'desc'),
+      collection(db, biographyCollection),
+      where('userId', '==', userId),
       limit(1),
     ),
     (snapshot) => {
@@ -42,8 +42,7 @@ export const subscribeBiographyByIdOperation = (
 }
 
 export const createBiographyOperation = async (
-  uid: UserId,
   dto: CreateBiographyDto,
 ): Promise<void> => {
-  await addDoc(collection(db, userCollection, uid, biographyCollection), dto)
+  await addDoc(collection(db, biographyCollection), dto)
 }

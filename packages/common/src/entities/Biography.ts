@@ -1,5 +1,7 @@
 import type { FieldValue } from 'firebase/firestore'
 
+import type { UserId } from './User'
+
 export const biographyCollection = 'biographies'
 
 export type BiographyId = string
@@ -12,6 +14,7 @@ export type Biography = {
   displayName: string
   profileImagePath: string | null
   updatedAt: Date
+  userId: UserId
   username: string
 }
 
