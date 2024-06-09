@@ -27,5 +27,10 @@ export type CreateBiographyDto = Omit<
 }
 
 export type UpdateBiographyDto = {
+  backgroundImagePath?: Biography['backgroundImagePath']
+  catchCopy?: Biography['catchCopy']
+  displayName?: Biography['displayName']
+  profileImagePath?: Biography['profileImagePath']
   updatedAt: FieldValue
+  username?: Biography['username']
 }

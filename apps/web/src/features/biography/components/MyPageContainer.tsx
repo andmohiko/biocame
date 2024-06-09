@@ -9,7 +9,7 @@ export const MyPageContainer = (): React.ReactNode => {
   return (
     <SimpleLayout>
       <FlexBox align="stretch" px={16} py={16}>
-        <EditBiographyForm biography={biography} />
+        {biography ? <EditBiographyForm biography={biography} /> : null}
       </FlexBox>
     </SimpleLayout>
   )
